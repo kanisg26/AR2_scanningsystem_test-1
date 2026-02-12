@@ -40,6 +40,7 @@
       </div>
       <div class="camera-controls">
         <button type="button" id="btn-camera-toggle" class="btn-action">カメラ切替</button>
+        <button type="button" id="btn-camera-resume" class="btn-action" hidden>カメラ再開</button>
         <button type="button" id="btn-undo" class="btn-action">取消</button>
         <button type="button" id="btn-calibrate" class="btn-action">校正</button>
       </div>
@@ -120,6 +121,51 @@
           <button type="button" id="btn-settings-close" class="btn-secondary">閉じる</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- モード選択ダイアログ (Android+ARCore端末のみ表示) -->
+  <div id="modal-mode-select" class="modal-overlay" hidden>
+    <div class="modal-dialog">
+      <h2>計測モードを選択</h2>
+      <p style="margin-bottom:16px;color:#666;">AR対応端末を検出しました。計測モードを選択してください。</p>
+      <div class="form-actions" style="flex-direction:column;gap:12px;">
+        <button type="button" id="btn-mode-snapshot" class="btn-primary" style="padding:14px;">
+          通常モード（スナップショット）
+        </button>
+        <button type="button" id="btn-mode-ar" class="btn-primary" style="padding:14px;background:#00897b;">
+          ARモード（空間アンカー）
+        </button>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:#999;">ARモードはAndroid + Chrome + ARCore端末で動作します</p>
+    </div>
+  </div>
+
+  <!-- AR dom-overlay UI (AR session中に表示) -->
+  <div id="ar-overlay" hidden>
+    <div id="ar-overlay-header">
+      <span id="ar-status">面をタップしてアンカーを配置</span>
+      <span id="ar-point-count">0点</span>
+    </div>
+    <div id="ar-overlay-footer">
+      <button type="button" id="btn-ar-undo" class="btn-action">取消</button>
+      <button type="button" id="btn-ar-done" class="btn-primary">完了</button>
+    </div>
+    <!-- AR distance dialog (floating) -->
+    <div id="ar-distance-dialog" class="ar-floating-dialog" hidden>
+      <p id="ar-distance-title">区間距離</p>
+      <p id="ar-distance-measured" style="font-size:18px;font-weight:bold;"></p>
+      <div class="form-row" style="margin-top:8px;">
+        <input type="number" id="ar-input-distance" step="0.01" min="0" inputmode="decimal"
+               placeholder="実測で上書き（任意）">
+      </div>
+      <div class="form-row" style="margin-top:4px;">
+        <input type="text" id="ar-input-memo" maxlength="50" placeholder="メモ（任意）">
+      </div>
+      <div class="form-actions" style="margin-top:8px;">
+        <button type="button" id="btn-ar-distance-ok" class="btn-primary">確定</button>
+        <button type="button" id="btn-ar-distance-skip" class="btn-secondary">スキップ</button>
+      </div>
     </div>
   </div>
 
