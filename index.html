@@ -27,49 +27,33 @@
 
   <main id="app-main">
 
-    <!-- 特徴点入力セクション -->
-    <section id="section-input" class="card">
-      <h2>特徴点入力</h2>
-      <form id="form-point" novalidate>
-        <div class="form-row">
-          <label for="input-point-id">点番号</label>
-          <input type="text" id="input-point-id" readonly>
+    <!-- カメラ映像セクション -->
+    <section id="section-camera" class="card">
+      <h2>カメラ映像</h2>
+      <div id="camera-container">
+        <video id="camera-video" autoplay playsinline muted></video>
+        <canvas id="camera-overlay"></canvas>
+        <div id="camera-error" class="camera-error" hidden>
+          <p id="camera-error-msg">カメラを起動中...</p>
+          <button type="button" id="btn-camera-retry" class="btn-primary">再試行</button>
         </div>
-        <div class="form-row">
-          <label for="input-x">X (m)</label>
-          <input type="number" id="input-x" step="0.001" value="0.000" inputmode="decimal">
-          <span class="error-msg" id="error-x"></span>
-        </div>
-        <div class="form-row">
-          <label for="input-y">Y (m)</label>
-          <input type="number" id="input-y" step="0.001" value="0.000" inputmode="decimal">
-          <span class="error-msg" id="error-y"></span>
-        </div>
-        <div class="form-row">
-          <label for="input-z">Z (m)</label>
-          <input type="number" id="input-z" step="0.001" value="0.000" inputmode="decimal">
-          <span class="error-msg" id="error-z"></span>
-        </div>
-        <div class="form-row">
-          <label for="input-memo">メモ</label>
-          <input type="text" id="input-memo" maxlength="50" placeholder="任意（最大50文字）">
-        </div>
-        <div class="form-actions">
-          <button type="submit" id="btn-add-point" class="btn-primary">追加</button>
-          <button type="button" id="btn-clear-form" class="btn-secondary">クリア</button>
-        </div>
-      </form>
+      </div>
+      <div class="camera-controls">
+        <button type="button" id="btn-camera-toggle" class="btn-action">カメラ切替</button>
+        <button type="button" id="btn-undo" class="btn-action">取消</button>
+        <button type="button" id="btn-calibrate" class="btn-action">校正</button>
+      </div>
     </section>
 
-    <!-- 登録済み特徴点リスト -->
+    <!-- 登録済みポイントリスト -->
     <section id="section-list" class="card">
       <h2>
-        登録済み特徴点
+        記録済みポイント
         <span id="point-count">(0点)</span>
         <span id="total-length">総延長: 0.000m</span>
       </h2>
       <div id="point-list" class="point-list">
-        <p class="empty-message">特徴点が登録されていません</p>
+        <p class="empty-message">ポイントが登録されていません</p>
       </div>
     </section>
 
@@ -110,7 +94,7 @@
 
   </main>
 
-  <!-- Settings Modal -->
+  <!-- 設定モーダル -->
   <div id="modal-settings" class="modal-overlay" hidden>
     <div class="modal-dialog">
       <h2>プロジェクト設定</h2>
@@ -134,6 +118,32 @@
         <div class="form-actions">
           <button type="submit" class="btn-primary">保存</button>
           <button type="button" id="btn-settings-close" class="btn-secondary">閉じる</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 距離入力ダイアログ -->
+  <div id="modal-distance" class="modal-overlay" hidden>
+    <div class="modal-dialog">
+      <h2 id="distance-dialog-title">区間距離の入力</h2>
+      <div id="distance-estimated" class="distance-estimated" hidden>
+        <span>推定距離: </span>
+        <strong id="distance-estimated-value">--</strong>
+      </div>
+      <form id="form-distance">
+        <div class="form-row">
+          <label for="input-distance">実測距離 (m)</label>
+          <input type="number" id="input-distance" step="0.01" min="0" inputmode="decimal"
+                 placeholder="例: 0.52">
+        </div>
+        <div class="form-row">
+          <label for="input-point-memo">メモ</label>
+          <input type="text" id="input-point-memo" maxlength="50" placeholder="任意（最大50文字）">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">確定</button>
+          <button type="button" id="btn-distance-skip" class="btn-secondary">スキップ</button>
         </div>
       </form>
     </div>
