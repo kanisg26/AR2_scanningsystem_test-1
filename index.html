@@ -1,1 +1,122 @@
-# AR2_scanningsystem_test-1
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>配管経路記録 (Web版)</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header id="app-header">
+    <h1>配管経路記録 <span class="version-badge">Web版</span></h1>
+    <div class="header-actions">
+      <button id="btn-settings" type="button" aria-label="設定">設定</button>
+      <button id="btn-help" type="button" aria-label="ヘルプ">?</button>
+    </div>
+  </header>
+
+  <main id="app-main">
+
+    <!-- 特徴点入力セクション -->
+    <section id="section-input" class="card">
+      <h2>特徴点入力</h2>
+      <form id="form-point" novalidate>
+        <div class="form-row">
+          <label for="input-point-id">点番号</label>
+          <input type="text" id="input-point-id" readonly>
+        </div>
+        <div class="form-row">
+          <label for="input-x">X (m)</label>
+          <input type="number" id="input-x" step="0.001" value="0.000" inputmode="decimal">
+          <span class="error-msg" id="error-x"></span>
+        </div>
+        <div class="form-row">
+          <label for="input-y">Y (m)</label>
+          <input type="number" id="input-y" step="0.001" value="0.000" inputmode="decimal">
+          <span class="error-msg" id="error-y"></span>
+        </div>
+        <div class="form-row">
+          <label for="input-z">Z (m)</label>
+          <input type="number" id="input-z" step="0.001" value="0.000" inputmode="decimal">
+          <span class="error-msg" id="error-z"></span>
+        </div>
+        <div class="form-row">
+          <label for="input-memo">メモ</label>
+          <input type="text" id="input-memo" maxlength="50" placeholder="任意（最大50文字）">
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="btn-add-point" class="btn-primary">追加</button>
+          <button type="button" id="btn-clear-form" class="btn-secondary">クリア</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 登録済み特徴点リスト -->
+    <section id="section-list" class="card">
+      <h2>
+        登録済み特徴点
+        <span id="point-count">(0点)</span>
+        <span id="total-length">総延長: 0.000m</span>
+      </h2>
+      <div id="point-list" class="point-list">
+        <p class="empty-message">特徴点が登録されていません</p>
+      </div>
+    </section>
+
+    <!-- 3Dプレビュー -->
+    <section id="section-3d" class="card">
+      <h2>3Dプレビュー</h2>
+      <div id="viewer-container">
+        <!-- Three.js canvas will be inserted here -->
+      </div>
+      <div class="view-presets">
+        <button type="button" class="btn-view" data-view="front">正面</button>
+        <button type="button" class="btn-view" data-view="top">上面</button>
+        <button type="button" class="btn-view" data-view="side">側面</button>
+        <button type="button" class="btn-view" data-view="iso">3D</button>
+      </div>
+    </section>
+
+    <!-- プロジェクト管理・出力ボタン -->
+    <section id="section-actions" class="card">
+      <div class="action-group">
+        <h3>プロジェクト</h3>
+        <div class="action-buttons">
+          <button type="button" id="btn-save" class="btn-action">保存</button>
+          <button type="button" id="btn-load" class="btn-action">読込</button>
+          <button type="button" id="btn-new" class="btn-action btn-danger">新規</button>
+        </div>
+      </div>
+      <div class="action-group">
+        <h3>データ出力</h3>
+        <div class="action-buttons">
+          <button type="button" id="btn-export-csv" class="btn-export">CSV</button>
+          <button type="button" id="btn-export-dxf" class="btn-export">DXF</button>
+          <button type="button" id="btn-export-glb" class="btn-export">GLB</button>
+          <button type="button" id="btn-export-obj" class="btn-export">OBJ</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Three.js (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- Application Scripts -->
+  <script type="module" src="js/config.js"></script>
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
