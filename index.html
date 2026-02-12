@@ -110,9 +110,39 @@
 
   </main>
 
+  <!-- Settings Modal -->
+  <div id="modal-settings" class="modal-overlay" hidden>
+    <div class="modal-dialog">
+      <h2>プロジェクト設定</h2>
+      <form id="form-settings">
+        <div class="form-row">
+          <label for="input-project-name">プロジェクト名</label>
+          <input type="text" id="input-project-name" placeholder="例: A現場_2026年2月">
+        </div>
+        <div class="form-row">
+          <label for="input-site-name">現場名</label>
+          <input type="text" id="input-site-name" placeholder="例: 京都市下水道工事A-12区間">
+        </div>
+        <div class="form-row">
+          <label for="input-operator">作業者</label>
+          <input type="text" id="input-operator" placeholder="例: 山田太郎">
+        </div>
+        <div class="form-row">
+          <label for="input-pipe-type">配管種別</label>
+          <input type="text" id="input-pipe-type" placeholder="例: 塩ビ管">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">保存</button>
+          <button type="button" id="btn-settings-close" class="btn-secondary">閉じる</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Three.js (CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/exporters/GLTFExporter.js"></script>
 
   <!-- Application Scripts -->
   <script type="module" src="js/config.js"></script>

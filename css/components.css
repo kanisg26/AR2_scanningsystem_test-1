@@ -233,3 +233,44 @@
   color: var(--color-text-light);
   font-size: var(--font-size-sm);
 }
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+/* Modal Dialog */
+.modal-dialog {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-elevated);
+  padding: var(--spacing-xl);
+  width: calc(100% - var(--spacing-xl) * 2);
+  max-width: 500px;
+}
+
+.modal-dialog h2 {
+  font-size: var(--font-size-h2);
+  margin-bottom: var(--spacing-lg);
+}
+
+.modal-dialog .form-row {
+  margin-bottom: var(--spacing-md);
+}
+
+.modal-dialog .form-actions {
+  margin-top: var(--spacing-lg);
+}

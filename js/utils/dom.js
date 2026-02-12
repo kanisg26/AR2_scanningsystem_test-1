@@ -82,3 +82,29 @@ export function createElement(tag, attrs = {}, children = []) {
 
   return el;
 }
+
+/**
+ * Triggers a file download from a Blob
+ * @param {Blob} blob - File content
+ * @param {string} filename - Download filename
+ */
+export function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Generates a timestamp string for filenames (YYYYMMDD_HHmmss)
+ * @returns {string}
+ */
+export function fileTimestamp() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+}

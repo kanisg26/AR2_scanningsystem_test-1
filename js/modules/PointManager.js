@@ -9,13 +9,8 @@ import { roundCoord, totalRouteLength, segmentLengths } from '../utils/math.js';
 
 export default class PointManager {
   constructor() {
-    /** @type {Array<Object>} Ordered list of feature points */
     this.points = [];
-
-    /** @type {number} Next auto-increment ID */
     this._nextId = 1;
-
-    /** @type {Function[]} Change listeners */
     this._listeners = [];
   }
 
